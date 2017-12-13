@@ -1,0 +1,52 @@
+{
+  "name": "spotify-wrapper",
+  "version": "1.0.0",
+  "description": "A wrapper to work the Spotify Web API.",
+  "main": "app.js",
+  "scripts": {
+    "build": "./node_modules/.bin/webpack --colors --progress",
+    "watch": "npm run build -- --watch",
+    "server": "./node_modules/.bin/webpack-dev-server --inline --open",
+    "lint": "./node_modules/.bin/eslint src/*.js",
+    "test": "./node_modules/.bin/mocha src/**/*.spec.js --bail --require babel-register",
+    "test:tdd": "./node_modules/.bin/mocha src/**/*.spec.js --require babel-register --watch",
+    "test:coverage": "nyc npm test"
+  },
+  "nyc": {
+    "function": 90,
+    "lines": 90,
+    "check-coverage": true,
+    "reporter": [
+      "text",
+      "html"
+    ],
+    "exclude": [
+      "src/**/*.spec.js"
+    ]
+  },
+  "author": "luketevl",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015-native-modules": "^6.9.4",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "eslint": "^4.12.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "husky": "^0.14.3",
+    "mocha": "^4.0.1",
+    "node-fetch": "^1.7.3",
+    "nyc": "^11.3.0",
+    "sinon": "^4.1.3",
+    "sinon-chai": "^2.14.0",
+    "sinon-stub-promise": "^4.0.0",
+    "webpack": "^2.2.0-rc.2",
+    "webpack-dev-server": "^1.16.2"
+  },
+  "dependencies": {
+    "ramda": "^0.22.1"
+  }
+}
