@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import sinonStubPromise  from 'sinon-stub-promise';
 
-import { search, searchAlbums, searchArtists, searchTracking, searchPlayLists } from './main';
+import { search, searchAlbums, searchArtists, searchTracks, searchPlayLists } from './main';
 
 chai.use(sinonChai);
 sinonStubPromise(sinon);
@@ -25,8 +25,8 @@ describe('Spotify Wrapper', () =>{
       expect(searchArtists).to.exist;
     });
 
-    it('should exists the searchTracking method', () => {
-      expect(searchTracking).to.exist;
+    it('should exists the searchTracks method', () => {
+      expect(searchTracks).to.exist;
     });
 
     it('should exists the searchPlayLists method', () => {
@@ -45,13 +45,13 @@ describe('Spotify Wrapper', () =>{
       fetchedStub.restore();
     });
 
-    it('should call fetch function', () => {      
-      const artists = search();      
-      expect(fetchedStub).to.have.been.calledOnce;
-    });
-
-  describe('Generic Search', () =>{
-   
+    
+    describe('Generic Search', () =>{
+      it('should call fetch function', () => {      
+        const result = search();      
+        expect(fetchedStub).to.have.been.calledOnce;
+      });
+      
       it('should call fetch with the correct URL', () => {
         context('passing one type', () => {
           const artists = search('Eminem', 'artist');
@@ -70,6 +70,62 @@ describe('Spotify Wrapper', () =>{
 
         expect(artists.resolveValue).to.be.eql({ body: 'json' });
       })
+  });
+
+  describe('Artists search', ()=>{
+    it('should call fetch function', () => {
+      const artists = searchArtists('Eminem');
+      expect(fetchedStub).to.have.been.calledOnce;
+    });
+
+    it('should call fetch with the correct URL', () => {
+      context('passing one type', () => {
+        const artists = searchArtists('Eminem');
+        expect(fetchedStub).to.have.been.calledWith('https://api.spotify.com/v1/search?q=Eminem&type=artist');
+      });
+    });
+  });
+
+  describe('Albums search', () => {
+    it('should call fetch function', () => {
+      const artists = searchAlbums('Eminem');
+      expect(fetchedStub).to.have.been.calledOnce;
+    });
+
+    it('should call fetch with the correct URL', () => {
+      context('passing one type', () => {
+        const artists = searchAlbums('Eminem');
+        expect(fetchedStub).to.have.been.calledWith('https://api.spotify.com/v1/search?q=Eminem&type=album');
+      });
+    });
+  });
+
+  describe('PlayList search', () => {
+    it('should call fetch function', () => {
+      const artists = searchPlayLists('Eminem');
+      expect(fetchedStub).to.have.been.calledOnce;
+    });
+
+    it('should call fetch with the correct URL', () => {
+      context('passing one type', () => {
+        const artists = searchPlayLists('Eminem');
+        expect(fetchedStub).to.have.been.calledWith('https://api.spotify.com/v1/search?q=Eminem&type=playlist');
+      });
+    });
+  });
+
+  describe('Tracks search', () => {
+    it('should call fetch function', () => {
+      const artists = searchTracks('Eminem');
+      expect(fetchedStub).to.have.been.calledOnce;
+    });
+
+    it('should call fetch with the correct URL', () => {
+      context('passing one type', () => {
+        const artists = searchTracks('Eminem');
+        expect(fetchedStub).to.have.been.calledWith('https://api.spotify.com/v1/search?q=Eminem&type=track');
+      });
+    });
   });
 
 });
