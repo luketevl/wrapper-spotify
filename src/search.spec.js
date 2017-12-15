@@ -3,14 +3,15 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import sinonStubPromise  from 'sinon-stub-promise';
 
-import { search, searchAlbums, searchArtists, searchTracks, searchPlayLists } from './main';
+import { search, searchAlbums, searchArtists, searchTracks, searchPlayLists } from './search';
+import { API_URL } from './config';
 
 chai.use(sinonChai);
 sinonStubPromise(sinon);
 
 global.fetch = require('node-fetch');
 
-describe('Spotify Wrapper', () =>{
+describe('Search', () =>{
   describe('Smoke tests', () => {
     
     it('should exists the search method', () =>{
@@ -55,12 +56,12 @@ describe('Spotify Wrapper', () =>{
       it('should call fetch with the correct URL', () => {
         context('passing one type', () => {
           const artists = search('Eminem', 'artist');
-          expect(fetchedStub).to.have.been.calledWith('https://api.spotify.com/v1/search?q=Eminem&type=artist');
+          expect(fetchedStub).to.have.been.calledWith(`${API_URL}/search?q=Eminem&type=artist`);
         });
 
         context('passing more one type', () => {
           const artists = search('Eminem', ['artist', 'album']);
-          expect(fetchedStub).to.have.been.calledWith('https://api.spotify.com/v1/search?q=Eminem&type=artist,album');
+          expect(fetchedStub).to.have.been.calledWith(`${API_URL}/search?q=Eminem&type=artist,album`);
         })
       });
 
@@ -81,7 +82,7 @@ describe('Spotify Wrapper', () =>{
     it('should call fetch with the correct URL', () => {
       context('passing one type', () => {
         const artists = searchArtists('Eminem');
-        expect(fetchedStub).to.have.been.calledWith('https://api.spotify.com/v1/search?q=Eminem&type=artist');
+        expect(fetchedStub).to.have.been.calledWith(`${API_URL}/search?q=Eminem&type=artist`);
       });
     });
   });
@@ -95,7 +96,7 @@ describe('Spotify Wrapper', () =>{
     it('should call fetch with the correct URL', () => {
       context('passing one type', () => {
         const artists = searchAlbums('Eminem');
-        expect(fetchedStub).to.have.been.calledWith('https://api.spotify.com/v1/search?q=Eminem&type=album');
+        expect(fetchedStub).to.have.been.calledWith(`${API_URL}/search?q=Eminem&type=album`);
       });
     });
   });
@@ -109,7 +110,7 @@ describe('Spotify Wrapper', () =>{
     it('should call fetch with the correct URL', () => {
       context('passing one type', () => {
         const artists = searchPlayLists('Eminem');
-        expect(fetchedStub).to.have.been.calledWith('https://api.spotify.com/v1/search?q=Eminem&type=playlist');
+        expect(fetchedStub).to.have.been.calledWith(`${API_URL}/search?q=Eminem&type=playlist`);
       });
     });
   });
@@ -123,7 +124,7 @@ describe('Spotify Wrapper', () =>{
     it('should call fetch with the correct URL', () => {
       context('passing one type', () => {
         const artists = searchTracks('Eminem');
-        expect(fetchedStub).to.have.been.calledWith('https://api.spotify.com/v1/search?q=Eminem&type=track');
+        expect(fetchedStub).to.have.been.calledWith(`${API_URL}/search?q=Eminem&type=track`);
       });
     });
   });
