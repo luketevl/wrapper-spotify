@@ -87,6 +87,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var API_URL = exports.API_URL = 'https://api.spotify.com/v1';
+var TOKEN = exports.TOKEN = 'BQC3nmRavGcyjBRf-WytK3C8QnVMBnCT898rAygppLC08-AVjOnbo5U66BIxeIENUrRH8Pb-xfDNC297lZyD6qZP4rxnjYG0z5U3fpjsGb1j7tdtHtfzQ1Qxf7aAknTKCcIpRfysRh8';
+var HEADERS = exports.HEADERS = {
+  headers: {
+    'Authorization': 'Bearer ' + TOKEN
+  }
+};
 
 /***/ }),
 /* 1 */
@@ -119,18 +125,18 @@ var _config = __webpack_require__(0);
 var _utils = __webpack_require__(1);
 
 var getAlbum = exports.getAlbum = function getAlbum(id) {
-  return fetch(_config.API_URL + '/albums/' + id).then(function (data) {
-    return data.toJSON();
+  return fetch(_config.API_URL + '/albums/' + id, _config.HEADERS).then(function (data) {
+    return (0, _utils.toJSON)(data);
   });
 };
 var getAlbums = exports.getAlbums = function getAlbums(ids) {
-  return fetch(_config.API_URL + '/albums/?ids=' + ids).then(function (data) {
-    return data.toJSON();
+  return fetch(_config.API_URL + '/albums/?ids=' + ids, _config.HEADERS).then(function (data) {
+    return (0, _utils.toJSON)(data);
   });
 };
 var getAlbumTracks = exports.getAlbumTracks = function getAlbumTracks(id) {
-  return fetch(_config.API_URL + '/albums/' + id + '/tracks').then(function (data) {
-    return data.toJSON();
+  return fetch(_config.API_URL + '/albums/' + id + '/tracks', _config.HEADERS).then(function (data) {
+    return (0, _utils.toJSON)(data);
   });
 };
 
@@ -151,7 +157,7 @@ var _config = __webpack_require__(0);
 var _utils = __webpack_require__(1);
 
 var search = exports.search = function search(query, type) {
-  return fetch(_config.API_URL + '/search?q=' + query + '&type=' + type).then(function (data) {
+  return fetch(_config.API_URL + '/search?q=' + query + '&type=' + type, _config.HEADERS).then(function (data) {
     return (0, _utils.toJSON)(data);
   });
 };
@@ -184,6 +190,7 @@ module.exports = {
   search: _search.search,
   searchArtists: _search.searchArtists,
   searchPlayLists: _search.searchPlayLists,
+  searchAlbums: _search.searchAlbums,
   getAlbum: _album.getAlbum,
   getAlbums: _album.getAlbums,
   getAlbumTracks: _album.getAlbumTracks
