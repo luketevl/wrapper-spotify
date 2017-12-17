@@ -15,7 +15,7 @@
     "server": "./node_modules/.bin/webpack-dev-server --inline --open",
     "lint": "./node_modules/.bin/eslint src/*.js",
     "test": "./node_modules/.bin/mocha src/**/*.spec.js --bail --require babel-register",
-    "test:tdd": "./node_modules/.bin/mocha src/**/*.spec.js --require babel-register --watch",
+    "test:tdd": "./node_modules/.bin/mocha src/**/*.spec.js --bail --require babel-register --watch",
     "test:coverage": "nyc npm test",
     "coveralls": "npm run test:coverage && nyc report --reporter=text-lcov | coveralls"
   },

@@ -1,13 +1,7 @@
 export default function album(){
   return {
-    getAlbum(id){
-      return this.request(`${this.apiURL}/albums/${id}`);
-    },
-    getAlbums(ids){
-      return this.request(`${API_URL}/albums/?ids=${ids}`);
-    },
-    getAlbumTracks(id){
-      return this.request(`${API_URL}/albums/${id}/tracks`);
-    }
+    getAlbum: id => this.request(`${this.apiURL}/albums/${id}`),
+    getAlbums: ids => this.request(`${this.apiURL}/albums/?ids=${ids}`),
+    getTracks: id => this.request(`${this.apiURL}/albums/${id}/tracks`),
   }
 };

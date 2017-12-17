@@ -13,7 +13,11 @@
   <script src="../dist/spotifyWrapper.umd.min.js"></script>
 
   <script>
-    const albums = spotifyWrapper.searchAlbums('Mc Kevinho');
+    const spotify = new SpotifyWrapper({
+        token: 'BQBdSyD6F7KHmUX-cn-HX3BxoW2NUtmyG-3uQRJbU-YyLI4EajPDyu9LCXamuE7GkJxIqogRFv7Igkv7oDnoirR9L3Xe9Ax-7K_cC6buiQwEyJSMfmx8qJ5UVgdNY-njF4hpD6c6keI'
+    });
+    const albums = spotify.search.albums('MC Kevinho');
+
     const albumsEl = document.getElementById('albums');
     albums
       .then(data => {
